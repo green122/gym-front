@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement, fetchInitial } from "./CounterSlice";
+import { setCategories, setPage, fetchWorkouts } from "./WorkoutsSlice";
 import { RootState } from "store";
 import styled from "@emotion/styled";
-import { fetchWorkouts } from "../workouts/WorkoutsSlice";
 
 const Container = styled.div``;
 
@@ -58,30 +57,6 @@ const Counter: React.FC = () => {
       ) : (
         <Value data-testid="counter-value">{count}</Value>
       )}
-
-      <div>
-        <Button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-          disabled={loading}
-        >
-          Increment
-        </Button>
-        <Button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-          disabled={loading}
-        >
-          Decrement
-        </Button>
-      </div>
-      <Button
-        aria-label="Slow fetch"
-        onClick={() => dispatch(fetchWorkouts())}
-        disabled={loading}
-      >
-        Slow fetch
-      </Button>
     </Container>
   );
 };

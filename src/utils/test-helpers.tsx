@@ -5,11 +5,13 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { initialState as counterInitialState } from "features/counter/CounterSlice";
 import { RootState } from "store";
+import { initialState as workoutsInitialState } from "../features/workouts/WorkoutsSlice";
 
 const mockStore = configureStore([thunk]);
 
 export const rootInitialState = {
   counter: counterInitialState,
+  workouts: workoutsInitialState,
 };
 
 export const renderWithRedux = (
