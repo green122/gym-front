@@ -10,6 +10,7 @@ interface InitialState {
   currentCategories: Category[];
   itemsOnPage: number;
   total: number;
+  currentDate: string;
   loading: boolean;
   error: string | null;
 }
@@ -17,6 +18,7 @@ interface InitialState {
 export const initialState: InitialState = {
   workouts: null,
   currentPage: 1,
+  currentDate: "",
   currentCategories: [],
   itemsOnPage: 10,
   total: 0,
@@ -29,11 +31,12 @@ export const fetchWorkouts = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     try {
       const {
-        workouts: { currentCategories, currentPage, itemsOnPage },
+        workouts: { currentCategories, currentPage, itemsOnPage, currentDate },
       } = getState() as RootState;
       const params: any = removeEmptyProperties({
         from: (currentPage - 1) * itemsOnPage,
         to: currentPage * itemsOnPage,
+        date: currentDate,
         categories: currentCategories ? currentCategories.join(",") : undefined,
       });
       const response = await axios.get<WorkoutResponse>(
@@ -59,6 +62,9 @@ export const slice = createSlice({
     setCategories: (state, action) => {
       state.currentCategories = action.payload;
     },
+    setDate: (state, action) => {
+      state.currentDate = action.payload;
+    },
   },
   extraReducers: {
     [fetchWorkouts.pending.type]: (state) => {
@@ -79,6 +85,6 @@ export const slice = createSlice({
   },
 });
 
-export const { setCategories, setPage } = slice.actions;
+export const { setCategories, setPage, setDate } = slice.actions;
 
 export const workoutReducer = slice.reducer;
