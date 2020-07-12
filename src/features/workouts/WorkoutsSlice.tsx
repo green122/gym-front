@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Category, Workout } from "../../models/Workout";
+import { Category, Workout, WorkoutResponse } from "../../models/Workout";
 import { RootState } from "../../store";
 import { removeEmptyProperties } from "../../utils/removeEmptyProperties";
 
@@ -9,6 +9,7 @@ interface InitialState {
   currentPage: number;
   currentCategories: Category[];
   itemsOnPage: number;
+  total: number;
   loading: boolean;
   error: string | null;
 }
@@ -18,6 +19,7 @@ export const initialState: InitialState = {
   currentPage: 1,
   currentCategories: [],
   itemsOnPage: 10,
+  total: 0,
   loading: false,
   error: null,
 };
@@ -34,9 +36,12 @@ export const fetchWorkouts = createAsyncThunk(
         to: currentPage * itemsOnPage,
         categories: currentCategories ? currentCategories.join(",") : undefined,
       });
-      const response = await axios.get("http://localhost:4400/workouts", {
-        params,
-      });
+      const response = await axios.get<WorkoutResponse>(
+        "http://localhost:4400/workouts",
+        {
+          params,
+        }
+      );
       return response.data;
     } catch (err) {
       return rejectWithValue("Something went wrong.");
@@ -59,8 +64,12 @@ export const slice = createSlice({
     [fetchWorkouts.pending.type]: (state) => {
       state.loading = true;
     },
-    [fetchWorkouts.fulfilled.type]: (state, action) => {
-      state.workouts = action.payload;
+    [fetchWorkouts.fulfilled.type]: (
+      state,
+      action: PayloadAction<WorkoutResponse>
+    ) => {
+      state.workouts = action.payload.workouts;
+      state.total = action.payload.total;
       state.loading = false;
     },
     [fetchWorkouts.rejected.type]: (state, action) => {
