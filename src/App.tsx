@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
-import Counter from "./features/counter/Counter";
 import { Provider } from "react-redux";
 import store from "./store";
 import styled from "@emotion/styled";
@@ -8,6 +6,7 @@ import { keyframes } from "@emotion/core";
 import { Workouts } from "./features/workouts/Workouts";
 import "antd/dist/antd.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { WorkoutDetails } from "./features/WorkoutDetails/WorkoutDetails";
 
 const Container = styled.div`
   text-align: center;
@@ -48,6 +47,7 @@ const App = () => {
       <Provider store={store}>
         <Switch>
           <Route path="/" exact={true} component={Workouts} />
+          <Route path="/workout/:workoutId" component={WorkoutDetails} />
         </Switch>
       </Provider>
     </BrowserRouter>
