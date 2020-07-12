@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
+import { Workouts } from "./features/workouts/Workouts";
+import "antd/dist/antd.css";
 
 const Container = styled.div`
   text-align: center;
@@ -42,12 +44,7 @@ const Logo = styled.img`
 const App = () => {
   return (
     <Provider store={store}>
-      <Container>
-        <Header>
-          <Logo src={logo} alt="logo" />
-          <Counter />
-        </Header>
-      </Container>
+      <Workouts />
     </Provider>
   );
 };
