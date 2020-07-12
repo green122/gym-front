@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCategories, setPage, fetchWorkouts } from "./WorkoutsSlice";
 import { RootState } from "store";
 import { Layout, DatePicker } from "antd";
+import { WorkoutsList } from "../../components/WorkoutsList/WorkoutsList";
 
 function disabledDate(current: Moment) {
   // Can not select days before today and today
@@ -31,6 +32,7 @@ export const Workouts: React.FC = () => {
           onChange={console.log}
           disabledDate={disabledDate}
         />
+        {workouts && <WorkoutsList workouts={workouts} />}
       </Layout.Content>
     </Layout>
   );
