@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import { Workouts } from "./features/workouts/Workouts";
 import "antd/dist/antd.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const Container = styled.div`
   text-align: center;
@@ -43,9 +44,13 @@ const Logo = styled.img`
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Workouts />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <Switch>
+          <Route path="/" exact={true} component={Workouts} />
+        </Switch>
+      </Provider>
+    </BrowserRouter>
   );
 };
 

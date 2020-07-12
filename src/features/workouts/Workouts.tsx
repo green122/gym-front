@@ -1,5 +1,5 @@
 import { Layout, DatePicker, Pagination } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import moment, { Moment } from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,6 +10,7 @@ import {
 } from "./WorkoutsSlice";
 import { RootState } from "store";
 import { WorkoutsList } from "../../components/WorkoutsList/WorkoutsList";
+import { CategoriesSelector } from "../../components/CategoriesSelector/CategoriesSelector";
 
 function disabledDate(current: Moment) {
   // Can not select days before today and today
@@ -19,7 +20,8 @@ function disabledDate(current: Moment) {
       current > moment().add(11, "month").endOf("day"))
   );
 }
-export const Workouts: React.FC = () => {
+export const Workouts = () => {
+  const [categoriesChanged, setCategoriesChanged] = useState(false);
   const {
     workouts,
     currentPage,
@@ -31,7 +33,7 @@ export const Workouts: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchWorkouts());
-  }, [currentPage, currentDate]);
+  }, [currentPage, currentDate, categoriesChanged]);
 
   return (
     <Layout>
@@ -41,6 +43,13 @@ export const Workouts: React.FC = () => {
           defaultValue={currentDate ? moment(currentDate) : moment()}
           onChange={(date: any) => dispatch(setDate(moment.utc(date).format()))}
           disabledDate={disabledDate}
+        />
+        <CategoriesSelector
+          selected={currentCategories}
+          onSelect={(categories) => {
+            dispatch(setCategories(categories));
+            setCategoriesChanged((prevStatus) => !prevStatus);
+          }}
         />
         {workouts && <WorkoutsList workouts={workouts} />}
         <Pagination

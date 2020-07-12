@@ -11,4 +11,4 @@ export interface WorkoutResponse {
   total: number
 }
 
-export type Category = "C1" | "C2" | "C3" | "C4" | "C5" | "C6" | "C7";
+export type Category = "c1" | "c2" | "c3" | "c4" | "c5" | "c6" | "c7";
