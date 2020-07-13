@@ -7,3 +7,17 @@ import "@testing-library/jest-dom/extend-expect";
 // Can be removed when a new version of react-scripts
 // is released with Jest v26
 import "mutationobserver-shim";
+
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});

@@ -77,6 +77,7 @@ export const slice = createSlice({
       state.workouts = action.payload.workouts;
       state.total = action.payload.total;
       state.loading = false;
+      state.currentPage = 1;
     },
     [fetchWorkouts.rejected.type]: (state, action) => {
       state.error = action.payload;

@@ -8,13 +8,12 @@ import { RootState } from "store";
 import { initialState as workoutsInitialState } from "../features/workouts/WorkoutsSlice";
 import { initialState as workoutDetailsState } from "../features/WorkoutDetails/WorkoutDetailsSlice";
 
-const mockStore = configureStore([thunk]);
-
 export const rootInitialState = {
   counter: counterInitialState,
   workouts: workoutsInitialState,
   details: workoutDetailsState,
 };
+const mockStore = configureStore<typeof rootInitialState>([thunk]);
 
 export const renderWithRedux = (
   ui: JSX.Element,
