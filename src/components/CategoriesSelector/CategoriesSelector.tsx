@@ -1,7 +1,9 @@
 import React from "react";
-import { Category, Workout } from "../../models/Workout";
+import { Category } from "../../models/Workout";
 import { Checkbox } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+
+import "./CategoriesSelector.scss";
 
 interface CategoriesSelectorProps {
   onSelect: (selected: Category[]) => void;
@@ -26,12 +28,14 @@ export const CategoriesSelector = ({
     <div className="categories-list">
       {categories.map((category, index) => (
         <Checkbox
+          className="categories-checkbox"
           data-key={category}
+          data-type="category"
           checked={selected.includes(category)}
           key={index}
           onChange={onChange}
         >
-          Checkbox
+          {category.toUpperCase()}
         </Checkbox>
       ))}
     </div>

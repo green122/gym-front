@@ -3,13 +3,11 @@ import React from "react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { initialState as counterInitialState } from "features/counter/CounterSlice";
 import { RootState } from "store";
 import { initialState as workoutsInitialState } from "../features/workouts/WorkoutsSlice";
 import { initialState as workoutDetailsState } from "../features/WorkoutDetails/WorkoutDetailsSlice";
 
 export const rootInitialState = {
-  counter: counterInitialState,
   workouts: workoutsInitialState,
   details: workoutDetailsState,
 };

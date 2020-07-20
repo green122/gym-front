@@ -1,0 +1,44 @@
+.filters {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+
+  .ant-picker {
+    width: 100%;
+  }
+
+  @media (min-width: 440px) {
+    .ant-picker {
+      width: 300px;
+    }
+  }
+}
+
+.filter-label {
+  margin: 0 5px;
+}
+
+.layout-container {
+  width: 1100px;
+  margin: auto;
+  @media (max-width: 400px) {
+    width: 280px;
+  }
+
+  @media (min-width: 400px) and (max-width: 1150px) {
+    width: 90%;
+  }
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+}

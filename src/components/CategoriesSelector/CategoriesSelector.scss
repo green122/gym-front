@@ -1,0 +1,12 @@
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  label.categories-checkbox {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}
+
+

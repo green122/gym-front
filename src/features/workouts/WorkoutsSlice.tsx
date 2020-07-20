@@ -20,7 +20,7 @@ export const initialState: InitialState = {
   currentPage: 1,
   currentDate: "",
   currentCategories: [],
-  itemsOnPage: 10,
+  itemsOnPage: 20,
   total: 0,
   loading: false,
   error: null,
@@ -61,9 +61,11 @@ export const slice = createSlice({
     },
     setCategories: (state, action) => {
       state.currentCategories = action.payload;
+      state.currentPage = 1;
     },
     setDate: (state, action) => {
       state.currentDate = action.payload;
+      state.currentPage = 1;
     },
   },
   extraReducers: {
@@ -77,7 +79,6 @@ export const slice = createSlice({
       state.workouts = action.payload.workouts;
       state.total = action.payload.total;
       state.loading = false;
-      state.currentPage = 1;
     },
     [fetchWorkouts.rejected.type]: (state, action) => {
       state.error = action.payload;
